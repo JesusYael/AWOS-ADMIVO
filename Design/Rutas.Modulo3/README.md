@@ -39,7 +39,7 @@ FOREIGN KEY (id_base) REFERENCES base (id_base)
 |Status code (error)|400|
 |Responte type (error)|JSON|
 |Response (error)|{"mensaje":"No se pudo realizar la consulta"}|
-|cURL|curl -d {"id_ruta":int,"id_base":int,"ruta_inicial":string, "destino":string, "monto":int} -x GET -H http://localhost:8000/rutas|
+|cURL|curl -x GET -H http://localhost:8000/rutas|
 
 
 |Property|Value|
@@ -56,7 +56,7 @@ FOREIGN KEY (id_base) REFERENCES base (id_base)
 |Status code (error)|400|
 |Responte type (error)|JSON|
 |Response (error)|{"mensaje":"No se pudo realizar la consulta"}|
-|cURL|curl -d {"id_ruta":int,"id_base":int,"ruta_inicial":string, "destino":string, "monto":int} -x GET -H http://localhost:8000/rutas/{id_ruta}|
+|cURL|curl -x GET -H http://localhost:8000/rutas/{id_ruta}|
 
 |Property|Value|
 |---|---|
