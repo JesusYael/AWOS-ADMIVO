@@ -40,7 +40,7 @@ unidades INT NOT NULL
 |---|---|
 |Description|End point para consultar todas las bases|
 |Method|Get|
-|Endpoint|http://localhost:8000/base|
+|URI|http://localhost:8000/base|
 |Query param|NA|
 |Path param|NA|
 |Data|NA|
@@ -57,7 +57,7 @@ unidades INT NOT NULL
 |---|---|
 |Description|End point para consultar un solo registro|
 |Method|Get|
-|Endpoint|http://localhost:8000/base?id_base=x|
+|URI|http://localhost:8000/base?id_base=x|
 |Query param|id_base|
 |Path param|NA|
 |Data|NA|
@@ -73,7 +73,7 @@ unidades INT NOT NULL
 |---|---|
 |Description|End point para actualizar una sola base|
 |Method|Put|
-|Endpoint|http://localhost:8000/base?id_base=x|
+|URI|http://localhost:8000/base?id_base=x|
 |Query param|id_base|
 |Path param|NA|
 |Data|{"dirección":varchar,"unidades":INT}|
@@ -89,7 +89,7 @@ unidades INT NOT NULL
 |---|---|
 |Description|End point para eliminar una base|
 |Method|Delete|
-|Endpoint|http://localhost:8000/base?id_base=x|
+|URI|http://localhost:8000/base?id_base=x|
 |Query param|id_base|
 |Path param|NA|
 |Data|NA|
