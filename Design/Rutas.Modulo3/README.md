@@ -57,3 +57,19 @@ FOREIGN KEY (id_base) REFERENCES base (id_base)
 |Responte type (error)|JSON|
 |Response (error)|{"mensaje":"No se pudo realizar la consulta"}|
 |cURL|curl -d {"id_ruta":int,"id_base":int,"ruta_inicial":string, "destino":string, "monto":int} -x GET -H http://localhost:8000/rutas/{id_ruta}|
+
+|Property|Value|
+|---|---|
+|Description|End point para agregar una neva ruta|
+|Method|POST|
+|Endpoint|http://localhost:8000/rutas|
+|Query param||
+|Path param|NA|
+|Data|{"id_ruta":int, "id_base":int, "ruta_inicial":string, "destino":string, "monto":int}|
+|Status code|202|
+|Response type|JSON|
+|Response|{"mensaje":"Registro insertado correctamente"}|
+|Status code (error)|400|
+|Responte type (error)|JSON|
+|Response (error)|{"mensaje":"Error al insertar el registro"}|
+|cURL|curl -d {"id_ruta":int,"id_base":int,"ruta_inicial":string, "destino":string, "monto":int} -x GET -H http://localhost:8000/rutas/{id_ruta}|
