@@ -72,7 +72,7 @@ FOREIGN KEY (id_base) REFERENCES base (id_base)
 |Status code (error)|400|
 |Responte type (error)|JSON|
 |Response (error)|{"mensaje":"Error al insertar el registro"}|
-|cURL|curl -d {"id_ruta":int,"id_base":int,"ruta_inicial":string, "destino":string, "monto":int} -x GET -H http://localhost:8000/rutas|
+|cURL|curl -d {"id_ruta":int,"id_base":int,"ruta_inicial":string, "destino":string, "monto":int} -x POST -H http://localhost:8000/rutas|
 
 |Property|Value|
 |---|---|
@@ -89,3 +89,19 @@ FOREIGN KEY (id_base) REFERENCES base (id_base)
 |Responte type (error)|JSON|
 |Response (error)|{"mensaje":"Error al actualizar"}|
 |cURL|curl -d {"id_ruta":int,"id_base":int,"ruta_inicial":string, "destino":string, "monto":int} -x PUT -H http://localhost:8000/rutas/{id_ruta}|
+
+|Property|Value|
+|---|---|
+|Description|End point para borrar una ruta por ID|
+|Method|DELETE|
+|Endpoint|http://localhost:8000/rutas{id_ruta}|
+|Query param|NA|
+|Path param|id_ruta|
+|Data|NA|
+|Status code|202|
+|Response type|JSON|
+|Response|{"mensaje":"Se ha eliminaado correctamente"}|
+|Status code (error)|400|
+|Responte type (error)|JSON|
+|Response (error)|{"mensaje":"Error al eliminar"}|
+|cURL|curl -d {"id_ruta":int,"id_base":int,"ruta_inicial":string, "destino":string, "monto":int} -x DELETE -H http://localhost:8000/rutas/{id_ruta}|
