@@ -10,6 +10,26 @@
 |CURP|varchar(30)|curp del chofer|
 |numero_licencia|varchar(50)|numero de licencia del chofer|
 
+## Scrip
+
+CREATE TABLE choferes(
+
+id_chofer integer primary key AUTO_INCREMENT,
+
+id_consesionario int NOT NULL,
+
+nombre varchar (50) NOT NULL,
+
+primer_ap varchar(50),
+
+segundo_ap varchar (50),
+
+curp varchar (50) NOT NULL,
+
+numero_licencia varchar(50) NOT NULL
+
+) ENGINE=INNODB;
+
 
 |Parametros|Datos|
 |---|---|
