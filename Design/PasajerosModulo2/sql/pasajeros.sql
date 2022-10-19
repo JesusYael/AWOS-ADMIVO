@@ -12,13 +12,11 @@ numero_usuario VARCHAR (10) NOT NULL,
 
 email VARCHAR (50) NOT NULL,
 
-password VARCHAR (32) NOT NULL,
-
-registros int NOT NULL
+password VARCHAR (32) NOT NULL
 
 );
 
-insert into pasajeros(nombre,primer_ap,segundo_ap,numero_usuario,email,password,registros)
+insert into pasajeros(nombre,primer_ap,segundo_ap,numero_usuario,email,password)
 values 
-("Sofia","Tunez","Rural","1","sofia@email.com","12345",1),
-("Maria","Polinesia","Garica","2","maria@email.com","54321",2);
+("Sofia","Tunez","Rural","1","sofia@email.com","12345"),
+("Maria","Polinesia","Garica","2","maria@email.com","54321");

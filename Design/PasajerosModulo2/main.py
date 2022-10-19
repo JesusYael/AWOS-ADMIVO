@@ -17,7 +17,7 @@ class pasajeros(BaseModel):
     numero_usuario: str
 	email: str
     password: str
-	registros: int
+
 
 class pasajerosIN(BaseModel):
 	id_pasajero: int
@@ -27,7 +27,7 @@ class pasajerosIN(BaseModel):
     numero_usuario: str
 	email: str
     password: str
-	registros: int
+	
 
 class pasajeros_post(BaseModel):
 	id_pasajero: int
@@ -37,7 +37,7 @@ class pasajeros_post(BaseModel):
     numero_usuario: str
 	email: str
     password: str
-	registros: int
+	
 
 description = """
 	# Pasajeros API REST
@@ -133,10 +133,10 @@ async def post_pasajeros(pasajero:pasajeros_post):
 		with sqlite3.connect("Design/PasajerosModulo2/sql/pasajeros.db") as connection:
 			connection.row_factory = sqlite3.Row
 			cursor = connection.cursor()
-			sql="INSERT INTO pasajeros VALUES (null, ?, ?, ?, ?, ?, ?, ?);"
-			values=(contacto.nombre, contacto.email, contacto.telefono,)
+			sql="INSERT INTO pasajeros VALUES (null, ?, ?, ?, ?, ?, ?);"
+			values=(pasajero.nombre, pasajero.primer_ap, pasajero.segundo_ap, pasajero.numero_usuario, pasajero.email, pasajero.password,)
 			cursor.execute(sql,values)
-			response = {"mensaje":"Contacto insertado"}
+			response = {"mensaje":"Pasajero insertado"}
 			return response
 	except Exception as error:
 		print(f"Error al insertar los datos: {error.args}")
@@ -146,51 +146,51 @@ async def post_pasajeros(pasajero:pasajeros_post):
 		) 
 		
 @app.put(
-	"/contactos/{id_contacto}",
+	"/contactos/{pasajero}",
 	response_model=mensaje,
 	status_code= status.HTTP_202_ACCEPTED,
-	summary="Actualizar contacto",
+	summary="Actualizar pasajero",
 	description="Endpoint actualización de datos",
 )
 
-async def contacto_put(id_contacto: int, contacto:contactos_post):
+async def pasajero_put(id_pasajero: int, pasajero:pasajeros_post):
 	try:
-		with sqlite3.connect("API/sql/contactos.db") as connection:
+		with sqlite3.connect("Design/PasajerosModulo2/sql/pasajeros.db") as connection:
 			connection.row_factory=sqlite3.Row
 			cursor=connection.cursor()
-			sql=("UPDATE contactos SET nombre=?,email=?,telefono=? WHERE id_contacto=?;")
-			values=(contacto.nombre, contacto.email, contacto.telefono, id_contacto,)
+			sql=("UPDATE pasajeros SET nombre=?, primer_ap=?, segundo_a=?, numero_usuario, email=?, password=? WHERE id_pasajero=?;")
+			values=(pasajero.nombre, pasajero.primer_ap, pasajero.segundo_a, pasajero.numero_usuario,  pasajero.email, pasajero.password, id_pasajero,)
 			cursor.execute(sql,values)
-			response = {"mensaje":"Contacto acuralizado"}
+			response = {"mensaje":"Pasajero acuralizado"}
 			return response
 	except Exception as error:
 		print(f"Error interno:{error.args}")
 		raise HTTPException(
 			status_code=status.HTTP_400_BAD_REQUEST,
-			detail="Error al actualizar contacto",
+			detail="Error al actualizar datos",
 		)
 
 @app.delete(
-	"/contactos/{id_contacto}",
+	"/pasajeros/{id_pasajero}",
 	response_model=mensaje,
 	status_code= status.HTTP_202_ACCEPTED,
-	summary="Eliminar contacto",
+	summary="Eliminar pasajero",
 	description="Endpoint para la eliminación de datos",
 )
 
-async def contacto_delete(id_contacto: int):
+async def pasajero_delete(id_pasajero: int):
 	try:
-		with sqlite3.connect("API/sql/contactos.db") as connection:
+		with sqlite3.connect("Design/PasajerosModulo2/sql/pasajeros.db") as connection:
 			connection.row_factory=sqlite3.Row
 			cursor=connection.cursor()
-			sql=("DELETE FROM contactos WHERE id_contacto=?;")
-			values=(id_contacto,)
+			sql=("DELETE FROM pasajeros WHERE id_pasajero=?;")
+			values=(id_pasajero,)
 			cursor.execute(sql,values)
-			response = {"mensaje":"Contacto eliminado"}
+			response = {"mensaje":"Pasajero eliminado"}
 			return response
 	except Exception as error:
 		print(f"Error interno:{error.args}")
 		raise HTTPException(
 			status_code=status.HTTP_400_BAD_REQUEST,
-			detail="Error al eliminar el contacto",
+			detail="Error al eliminar el pasajero",
 		)
