@@ -5,13 +5,6 @@ from pydantic import BaseModel
 from pydantic import EmailStr
 from fastapi import HTTPException
 from fastapi import status
-import email
-from optparse import Values
-from site import execsitecustomize
-from unittest import result
-from urllib import response
-from fastapi import Query
-from fastapi.responses import JSONResponse
 
 
 
@@ -25,7 +18,7 @@ class pasajeros(BaseModel):
 	segundo_ap: str
 	numero_usuario: str
 	email: str
-	password: str
+
 
 
 class pasajerosIN(BaseModel):
@@ -35,7 +28,6 @@ class pasajerosIN(BaseModel):
 	segundo_ap: str
 	numero_usuario: str
 	email: str
-	password: str
 	
 
 class pasajeros_post(BaseModel):
@@ -91,7 +83,7 @@ async def get_pasajeros(id_pasajero:int):
 		with sqlite3.connect("Design/PasajerosModulo2/sql/pasajeros.db") as connection:
 			connection.row_factory = sqlite3.Row
 			cursor = connection.cursor()
-			sql="SELECT * FROM pasajeros WHERE id_pasajero=?;"
+			sql="SELECT id_pasajero, nombre, primer_ap, segundo_ap, numero_usuario, email FROM pasajeros WHERE id_pasajero=?;"
 			values=(id_pasajero, )
 			cursor.execute(sql,values)
 			response= cursor.fetchone()
@@ -117,7 +109,7 @@ async def get_pasajeros():
 		with sqlite3.connect("Design/PasajerosModulo2/sql/pasajeros.db") as connection:
 			connection.row_factory = sqlite3.Row
 			cursor = connection.cursor()
-			cursor.execute("SELECT id_pasajero, nombre, primer_ap, segundo_ap, numero_usuario, email, password FROM pasajeros;")
+			cursor.execute("SELECT id_pasajero, nombre, primer_ap, segundo_ap, numero_usuario, email FROM pasajeros;")
 			response = cursor.fetchall()
 			return response
 	except Exception as error:
@@ -154,7 +146,7 @@ async def post_pasajeros(pasajero:pasajeros_post):
 		) 
 		
 @app.put(
-	"/contactos/{id_pasajero}",
+	"/pasajeros/{id_pasajero}",
 	response_model=mensaje,
 	status_code= status.HTTP_202_ACCEPTED,
 	summary="Actualizar pasajero",
