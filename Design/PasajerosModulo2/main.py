@@ -5,6 +5,15 @@ from pydantic import BaseModel
 from pydantic import EmailStr
 from fastapi import HTTPException
 from fastapi import status
+import email
+from optparse import Values
+from site import execsitecustomize
+from unittest import result
+from urllib import response
+from fastapi import Query
+from fastapi.responses import JSONResponse
+
+
 
 class mensaje(BaseModel):
 	mensaje: str
@@ -12,31 +21,30 @@ class mensaje(BaseModel):
 class pasajeros(BaseModel):
 	id_pasajero: int
 	nombre: str
-    primer_ap: str
-    segundo_ap: str
-    numero_usuario: str
+	primer_ap: str
+	segundo_ap: str
+	numero_usuario: str
 	email: str
-    password: str
+	password: str
 
 
 class pasajerosIN(BaseModel):
 	id_pasajero: int
 	nombre: str
-    primer_ap: str
-    segundo_ap: str
-    numero_usuario: str
+	primer_ap: str
+	segundo_ap: str
+	numero_usuario: str
 	email: str
-    password: str
+	password: str
 	
 
 class pasajeros_post(BaseModel):
-	id_pasajero: int
 	nombre: str
-    primer_ap: str
-    segundo_ap: str
-    numero_usuario: str
+	primer_ap: str
+	segundo_ap: str
+	numero_usuario: str
 	email: str
-    password: str
+	password: str
 	
 
 description = """
@@ -109,7 +117,7 @@ async def get_pasajeros():
 		with sqlite3.connect("Design/PasajerosModulo2/sql/pasajeros.db") as connection:
 			connection.row_factory = sqlite3.Row
 			cursor = connection.cursor()
-			cursor.execute("SELECT * FROM pasajeros;")
+			cursor.execute("SELECT id_pasajero, nombre, primer_ap, segundo_ap, numero_usuario, email, password FROM pasajeros;")
 			response = cursor.fetchall()
 			return response
 	except Exception as error:
@@ -146,7 +154,7 @@ async def post_pasajeros(pasajero:pasajeros_post):
 		) 
 		
 @app.put(
-	"/contactos/{pasajero}",
+	"/contactos/{id_pasajero}",
 	response_model=mensaje,
 	status_code= status.HTTP_202_ACCEPTED,
 	summary="Actualizar pasajero",
@@ -158,8 +166,8 @@ async def pasajero_put(id_pasajero: int, pasajero:pasajeros_post):
 		with sqlite3.connect("Design/PasajerosModulo2/sql/pasajeros.db") as connection:
 			connection.row_factory=sqlite3.Row
 			cursor=connection.cursor()
-			sql=("UPDATE pasajeros SET nombre=?, primer_ap=?, segundo_a=?, numero_usuario, email=?, password=? WHERE id_pasajero=?;")
-			values=(pasajero.nombre, pasajero.primer_ap, pasajero.segundo_a, pasajero.numero_usuario,  pasajero.email, pasajero.password, id_pasajero,)
+			sql=("UPDATE pasajeros SET nombre=?, primer_ap=?, segundo_ap=?, numero_usuario=?, email=?, password=? WHERE id_pasajero=?;")
+			values=(pasajero.nombre, pasajero.primer_ap, pasajero.segundo_ap, pasajero.numero_usuario,  pasajero.email, pasajero.password, id_pasajero,)
 			cursor.execute(sql,values)
 			response = {"mensaje":"Pasajero acuralizado"}
 			return response
